@@ -8,12 +8,12 @@ A full vul scanner which contains many aspects (adding)
 
 | Category | Function | Feature | Finished |
 | :------: | :------: | :-----: | :------:|
-| Web | Fingerprint | Web Server | N |
+| Web | Fingerprint | Web Server | Y |
 | Web | Fingerprint | CMS | N |
-| Web | Fingerprint | CSLanguage | N |
+| Web | Fingerprint | CSLang | N |
 | Web | Fingerprint | WAF | N |
 | Web | Fingerprint | Crawler | N |
-| Web | Fingerprint | HttpMethod | N |
+| Web | Fingerprint | HttpMethod | Y |
 | Web | Fingerprint | Cookie | N |
 | Web | Fingerprint | CDN | N |
 | Web | Fingerprint| WhoisInfo| N |
