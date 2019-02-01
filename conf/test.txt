@@ -1,3 +1,7 @@
+GOROOT=/usr/local/go #gosetup
+GOPATH=/home/lovebear/go_proj #gosetup
+/usr/local/go/bin/go build -o /tmp/___go_build_main_go /home/lovebear/go_proj/src/Shyvana/main.go #gosetup
+/tmp/___go_build_main_go #gosetup
 <!doctype html>
 <html lang="en-US">
 <head>

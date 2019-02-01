@@ -1,13 +1,9 @@
 package main
 
-import (
-	"fmt"
-	"regexp"
-)
+import "Shyvana/modules/web"
 
 func main(){
-	//web.LaunchWebScan()
-	key := "PHP-PID"
-	match, _ := regexp.MatchString(`PHP\S*`, key)
-	fmt.Println(match)
+	web.LaunchWebScan()
+	//body := "1111111111.php111.phtmlzzz.php11"
+	//fingerprints.IsPhp(body)
 }
