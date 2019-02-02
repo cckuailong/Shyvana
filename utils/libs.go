@@ -1,6 +1,8 @@
 package utils
 
-import "math"
+import (
+	"math"
+)
 
 func StrIsIn(item string, list []string)bool{
 	for _, c := range(list){
