@@ -1,4 +1,4 @@
-package crawler
+package crawl
 
 import (
 	"Shyvana/modules/web/fingerprints"
@@ -10,9 +10,10 @@ import (
 	"strings"
 )
 
-
-func Crawl(ip_l []string)[]string{
+// return (Website URIs, Found Emails)
+func Crawl(ip_l []string)([]string, []string){
 	var body string
+	fetched_email := []string{}
 	crawling_l := list.New()
 	crawled_l := []string{}
 	maindom := fingerprints.GetMainDomain()
@@ -26,6 +27,7 @@ func Crawl(ip_l []string)[]string{
 			continue
 		}
 		body = utils.GetRespBody(uri)
+		fetched_email = FetchEmail(body, fetched_email)
 		re, _ := regexp.Compile(`(?i)href\s?=\s?["\|'](.*?)["\|']`)
 		uris := re.FindAllStringSubmatch(body, -1)
 		for _, uri := range(uris){
@@ -37,9 +39,10 @@ func Crawl(ip_l []string)[]string{
 		crawled_l = append(crawled_l, uri)
 		crawling_l.Remove(front)
 	}
-	return crawled_l
+	return crawled_l, fetched_email
 }
 
+// Filter the Appropriate Uri
 func filterUri(uri, maindom, ip string)bool{
 	if (strings.Contains(uri, maindom) || strings.Contains(uri, ip)) && strings.Contains(uri, "http"){
 		return true

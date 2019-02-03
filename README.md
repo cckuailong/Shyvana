@@ -8,19 +8,20 @@ A full vul scanner which contains many aspects (adding)
 
 | Category | Function | Feature | Finished |
 | :------: | :------: | :-----: | :------:|
+| Web | Crawl | Crawler | Y |
+| Web | Crawl| Email| Y |
+| Web | Crawl | Subdomain| Y |
 | Web | Fingerprint | IP | Y |
-| Web | Fingerprint | IPInfo | N |
+| Web | Fingerprint | IPInfo | Y |
 | Web | Fingerprint | Web Server | Y |
 | Web | Fingerprint | CSLang | Y |
-| Web | Fingerprint | Crawler | Y |
-| Web | Fingerprint | Subdomain| N |
 | Web | Fingerprint | HttpMethod | Y |
 | Web | Fingerprint | CMS | N |
 | Web | Fingerprint | WAF | N |
-| Web | Fingerprint | Cookie | N |
+| Web | Fingerprint | CookieSec | Y |
+| Web | Fingerprint | HeaderSec | Y |
 | Web | Fingerprint | CDN | N |
 | Web | Fingerprint| WhoisInfo| N |
-| Web | Fingerprint| Email| N |
 | Web | Vul| SqlInj | N |
 | Web | Vul| HtmlInj | N |
 | Web | Vul| LDAPInj | N |

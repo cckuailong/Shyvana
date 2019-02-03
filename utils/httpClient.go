@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"Shyvana/logger"
 	"Shyvana/vars"
 	"io"
 	"io/ioutil"
@@ -57,6 +58,7 @@ func GetRespBody(uri string)string{
 	params := url.Values{}
 	resp, err := http_req(uri, params, "GET", vars.Headers)
 	if err != nil{
+		logger.Log.Println("%v", err)
 		return ""
 	}
 	body,  _ := ioutil.ReadAll(resp.Body)
