@@ -1,6 +1,9 @@
 package utils
 
 import (
+	"crypto/md5"
+	"fmt"
+	"io"
 	"math"
 )
 
@@ -23,4 +26,11 @@ func MaxMap(map_l map[string]int)(string, int){
 		}
 	}
 	return res_k, res_v
+}
+
+// Md5 func
+func MD5(s string) (m string) {
+	h := md5.New()
+	_, _ = io.WriteString(h, s)
+	return fmt.Sprintf("%x", h.Sum(nil))
 }

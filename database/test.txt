@@ -1,0 +1,6 @@
+{
+"wordpress": [
+	    ["wp-login.php", "wp-login.php?action=lostpassword"],
+		["wp-admin/images/w-logo-blue.png", "7c129101ccaa73c604221737ce8380f1"]
+	]
+}
