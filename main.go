@@ -11,6 +11,6 @@ func main(){
 	//re, _ := regexp.Compile(`(?i)=(.*?)111`)
 	//res := re.FindAllStringSubmatch(body, -1)
 	//fmt.Println(res)
-	res := fingerprints.DetectCms()
+	res := fingerprints.DetectWaf()
 	fmt.Println(res)
 }
