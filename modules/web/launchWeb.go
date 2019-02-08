@@ -2,7 +2,10 @@ package web
 
 import (
 	"Shyvana/logger"
+	"Shyvana/modules/web/fingerprints"
 	"Shyvana/utils"
+	"Shyvana/vars"
+	"fmt"
 )
 
 func LaunchWebScan(){
@@ -11,7 +14,7 @@ func LaunchWebScan(){
 	if resp_header == nil{
 		logger.Log.Println("[Error][ HttpErr ] Get Response Headers Error")
 	}
-	//fmt.Println(resp_header)
+	fmt.Println(resp_header)
 
 	// Get the response headers with OPTIONS
 	//resp_opt_header := utils.GetHttpMethod()
@@ -19,11 +22,11 @@ func LaunchWebScan(){
 	//	logger.Log.Println("[Error][ HttpErr ] Get Http Method Error")
 	//}
 
-	// Get the response body with GET
-	//resp_body := utils.GetRespBody(vars.Webinfo.Web_url)
-	//if len(resp_body) == 0{
-	//	logger.Log.Println("[ Warinng ][ HttpWarn ] Get Http Body Error or Empty Body")
-	//}
+	//Get the response body with GET
+	resp_body := utils.GetRespBody(vars.Webinfo.Web_url)
+	if len(resp_body) == 0{
+		logger.Log.Println("[ Warinng ][ HttpWarn ] Get Http Body Error or Empty Body")
+	}
 
 	// Get the Web Server, Like Apache, Nginx and so on
 	// Empty: ""
@@ -46,4 +49,8 @@ func LaunchWebScan(){
 	// Detect Headers Security
 	//headerres := fingerprints.DetectHeaderSec(resp_header)
 	//fmt.Println(headerres)
+
+	// Detect Waf
+	res := fingerprints.DetectWaf(resp_header, resp_body)
+	fmt.Println(res)
 }

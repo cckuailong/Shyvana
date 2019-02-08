@@ -5,11 +5,22 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"regexp"
 )
 
 func StrIsIn(item string, list []string)bool{
 	for _, c := range(list){
 		if c == item{
+			return true
+		}
+	}
+	return false
+}
+
+func StrLikelyIn(item string, list []string)bool{
+	for _, c := range(list){
+		match, _ := regexp.MatchString(`(?i)`+item, c)
+		if match{
 			return true
 		}
 	}

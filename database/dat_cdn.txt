@@ -1,0 +1,13 @@
+{
+	"CloudFlare": {
+		"headers": {
+			"Server": ["cloudflare-nginx"]
+		}
+	},
+	"Cloudfront": {
+		"headers": {
+			"Server": ["cloudfront"],
+			"X-Cache": ["cloudfront"]
+		}
+	},
+}

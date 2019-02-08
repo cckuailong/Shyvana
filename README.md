@@ -17,7 +17,7 @@ A full vul scanner which contains many aspects (adding)
 | Web | Fingerprint | CSLang | Y |
 | Web | Fingerprint | HttpMethod | Y |
 | Web | Fingerprint | CMS | Y |
-| Web | Fingerprint | WAF | N |
+| Web | Fingerprint | WAF | Y |
 | Web | Fingerprint | CookieSec | Y |
 | Web | Fingerprint | HeaderSec | Y |
 | Web | Fingerprint | CDN | N |

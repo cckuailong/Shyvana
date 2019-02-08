@@ -1,5 +1,167 @@
 {
-"Topsec-Waf":{"index":{"index":["<META NAME=\"Copyright\" CONTENT=\"Topsec Network Security Technology Co.,Ltd\"/>", "<META NAME=\"DESCRIPTION\" CONTENT=\"Topsec web UI\"/>"]}},
-"360":{"headers":{"X-Powered-By-360wzb":["wangzhan.360.cn"]}},
-"Cloudfront":{"headers":{"Server":["cloudfront"], "X-Cache":["cloudfront"]}}
+	"Topsec-Waf": {
+		"index": {
+			"index": ["<META NAME=\"Copyright\" CONTENT=\"Topsec Network Security Technology Co.,Ltd\"/>", "<META NAME=\"DESCRIPTION\" CONTENT=\"Topsec web UI\"/>"]
+		}
+	},
+	"360": {
+		"headers": {
+			"X-Powered-By-360wzb": ["wangzhan.360.cn"]
+		},
+		"index": {
+			"index": ["wzws-waf-cgi/", "360wzws"]
+		}
+	},
+	"Anquanbao": {
+		"headers": {
+			"X-Powered-By-Anquanbao": ["MISS"]
+		},
+		"index": {
+			"index": ["aqb_cc/error/", "ASERVER"]
+		}
+	},
+	"BaiduYunjiasu": {
+		"headers": {
+			"Server": ["yunjiasu-nginx"]
+		}
+	},
+	"BigIP": {
+		"headers": {
+			"Server": ["BigIP", "BIGipServer"],
+			"Set-Cookie": ["BigIP", "BIGipServer"]
+		}
+	},
+	"BinarySEC": {
+		"headers": {
+			"X-Binarysec-Cache": ["fill", "miss"],
+			"X-Binarysec-Via": ["binarysec.com"]
+		}
+	},
+	"BlockDoS": {
+		"headers": {
+			"Server": ["BlockDos.net"]
+		}
+	},
+	"Comodo": {
+		"headers": {
+			"Server": ["Protected by COMODO"]
+		}
+	},
+	"DenyAll": {
+		"headers": {
+			"Set-Cookie": ["sessioncookie="]
+		}
+	},
+	"dotDefender": {
+		"headers": {
+			"X-dotDefender-denied": ["1"]
+		}
+	},
+	"IBM-DataPower": {
+		"headers": {
+			"X-Backside-Transport": ["(OK|FAIL)"]
+		}
+	},
+	"Incapsula": {
+		"headers": {
+			"X-CDN": ["Incapsula"]
+		}
+	},
+	"Jiasule": {
+		"headers": {
+			"Set-Cookie": ["jsluid="]
+		}
+	},
+	"KSYUN": {
+		"headers": {
+			"Server": ["KSYUN ELB"]
+		}
+	},
+	"KONA": {
+		"headers": {
+			"Server": ["AkamaiGHost"]
+		}
+	},
+	"ModSecurity": {
+		"headers": {
+			"Server": ["Mod_Security", "NOYB"]
+		}
+	},
+	"NetContinuum": {
+		"headers": {
+			"Cneonction": ["close"],
+			"nnCoection": ["close"],
+			"Set-Cookie": ["citrix_ns_id"]
+		}
+	},
+	"Newdefend": {
+		"headers": {
+			"Server": ["newdefend"]
+		}
+	},
+	"NSFOCUS": {
+		"headers": {
+			"Server": ["NSFocus"]
+		}
+	},
+	"Safe3": {
+		"headers": {
+			"X-Powered-By": ["Safe3WAF"],
+			"Server": ["Safe3 Web Firewall"]
+		}
+	},
+	"Safedog": {
+		"headers": {
+			"X-Powered-By": ["WAF/2.0"],
+			"Server": ["Safedog"],
+			"Set-Cookie": ["Safedog"]
+		}
+	},
+	"SonicWALL": {
+		"headers": {
+			"Server": ["SonicWALL"]
+		}
+	},
+	"Stingray": {
+		"headers": {
+			"Set-Cookie": ["X-Mapping-"]
+		}
+	},
+	"Sucuri": {
+		"headers": {
+			"Server": ["Sucuri/Cloudproxy"]
+		}
+	},
+	"Usp-Sec": {
+		"headers": {
+			"Server": ["Secure Entry Server"]
+		}
+	},
+	"Varnish": {
+		"headers": {
+			"X-Varnish": [""],
+			"Server": ["varnish"]
+		}
+	},
+	"Wallarm": {
+		"headers": {
+			"Server": ["nginx-wallarm"]
+		}
+	},
+	"WebKnight": {
+		"headers": {
+			"Server": ["WebKnight"]
+		}
+	},
+	"Yundun": {
+		"headers": {
+			"X-Cache": ["YUNDUN"],
+			"Server": ["YUNDUN"]
+		}
+	},
+	"Yunsuo": {
+		"headers": {
+			"Set-Cookie": ["yunsuo"]
+		}
+	}
 }
