@@ -4,7 +4,6 @@ import (
 	"Shyvana/logger"
 	"Shyvana/modules/web/fingerprints"
 	"Shyvana/utils"
-	"Shyvana/vars"
 	"fmt"
 )
 
@@ -23,10 +22,10 @@ func LaunchWebScan(){
 	//}
 
 	//Get the response body with GET
-	resp_body := utils.GetRespBody(vars.Webinfo.Web_url)
-	if len(resp_body) == 0{
-		logger.Log.Println("[ Warinng ][ HttpWarn ] Get Http Body Error or Empty Body")
-	}
+	//resp_body := utils.GetRespBody(vars.Webinfo.Web_url)
+	//if len(resp_body) == 0{
+	//	logger.Log.Println("[ Warinng ][ HttpWarn ] Get Http Body Error or Empty Body")
+	//}
 
 	// Get the Web Server, Like Apache, Nginx and so on
 	// Empty: ""
@@ -51,6 +50,14 @@ func LaunchWebScan(){
 	//fmt.Println(headerres)
 
 	// Detect Waf
-	res := fingerprints.DetectWaf(resp_header, resp_body)
-	fmt.Println(res)
+	//res := fingerprints.DetectWaf(resp_header, resp_body)
+	//fmt.Println(res)
+
+	// Detect cdn
+	//res := fingerprints.DetectCdn(resp_header)
+	//fmt.Println(res)
+
+	// Get Whois Info
+	fingerprints.GetWhoisInfo()
+
 }

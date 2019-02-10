@@ -20,8 +20,8 @@ A full vul scanner which contains many aspects (adding)
 | Web | Fingerprint | WAF | Y |
 | Web | Fingerprint | CookieSec | Y |
 | Web | Fingerprint | HeaderSec | Y |
-| Web | Fingerprint | CDN | N |
-| Web | Fingerprint| WhoisInfo| N |
+| Web | Fingerprint | CDN | Y |
+| Web | Fingerprint| WhoisInfo| Y |
 | Web | Vul| SqlInj | N |
 | Web | Vul| HtmlInj | N |
 | Web | Vul| LDAPInj | N |

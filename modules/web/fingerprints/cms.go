@@ -10,19 +10,19 @@ import (
 	"strings"
 )
 
-func DetectCms() string{
+func DetectCms() (string, error){
 	var item_s, web_file, match_str, uri, body string
 	var idx int
 	j_dat, err := ioutil.ReadFile("database/dat_cms.txt")
 	if err != nil{
 		logger.Log.Println("[ Error ][ IOErr ] Load dat_cms.txt Error")
-		return ""
+		return "", err
 	}
 	cms_m := make(map[string][]interface{})
 	err = json.Unmarshal(j_dat, &cms_m)
 	if err != nil{
 		logger.Log.Println("[ Error ][ IOErr ] %v", err)
-		return ""
+		return "", err
 	}
 	for name, items := range(cms_m){
 		for _, item := range(items){
@@ -37,20 +37,14 @@ func DetectCms() string{
 			}
 			if len(match_str) == 32{
 				if utils.MD5(body) == match_str{
-					fmt.Println(body)
-					fmt.Println(web_file)
-					fmt.Println(match_str)
-					return name
+					return name, nil
 				}
 			}else {
 				if strings.Contains(body, match_str){
-					fmt.Println(body)
-					fmt.Println(web_file)
-					fmt.Println(match_str)
-					return name
+					return name, nil
 				}
 			}
 		}
 	}
-	return ""
+	return "Unknown", nil
 }

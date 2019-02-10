@@ -1,4 +1,42 @@
 {
+	"Airee": {
+		"headers": {
+			"Server": ["Airee"]
+		}
+	},
+	"Akamai": {
+		"headers": {
+			"Server": ["akamai"]
+		}
+	},
+	"Azure": {
+		"headers": {
+			"Server": ["azure"]
+		}
+	},
+	"Beluga": {
+		"headers": {
+			"X-Beluga-Cache-Status": [""],
+			"X-Beluga-Node": [""],
+			"X-Beluga-Record": [""],
+			"X-Beluga-Response-Time": [""],
+			"X-Beluga-Status": [""],
+			"X-Beluga-Trace": [""],
+			"X-Beluga-Response-Time-X": [""]
+		}
+	},
+	"CacheFly": {
+		"headers": {
+			"CacheFly-Control": [""],
+			"Bestcdn": ["CacheFly"]
+		}
+	},
+	"CleverCloud": {
+		"headers": {
+			"WWW-Authenticate": ["clever cloud"],
+			"CleverCloudUpgrade": [""]
+		}
+	},
 	"CloudFlare": {
 		"headers": {
 			"Server": ["cloudflare-nginx"]
@@ -10,4 +48,14 @@
 			"X-Cache": ["cloudfront"]
 		}
 	},
+	"Fastly": {
+		"headers": {
+			"X-Fastly-Request-ID": [""]
+		}
+	},
+	"Myracloud": {
+		"headers": {
+			"Server": ["myracloud"]
+		}
+	}
 }

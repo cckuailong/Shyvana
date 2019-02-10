@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func GetCsLang(headers http.Header, body string)string{
+func GetCsLang(headers http.Header, body string)(string, error){
 	var match bool
 	// via Set-Cookie head
 	if _, ok:=headers["Set-Cookie"];ok{
@@ -18,13 +18,13 @@ func GetCsLang(headers http.Header, body string)string{
 			lang_str := strings.ToLower(set_cookie[:eq_ind])
 			switch lang_str {
 			case "phpsessid-php":
-				return "Php"
+				return "Php", nil
 			case "jsessionid-jsp":
-				return "Java"
+				return "Java", nil
 			case "aspsessionid-asp":
-				return "Asp"
+				return "Asp", nil
 			case "asp.net_sessionid-aspx":
-				return "Asp"
+				return "Asp", nil
 			default:
 				logger.Log.Println("[ Info ][ CsLang ] No CsLang info in Set-Cookie")
 			}
@@ -36,27 +36,27 @@ func GetCsLang(headers http.Header, body string)string{
 	for key, _ := range(headers){
 		match, _ = regexp.MatchString(`(?i)PHP\S*`, key)
 		if match{
-			return "Php"
+			return "Php", nil
 		}
 		match, _ = regexp.MatchString(`(?i)Java|Servlet|JSP|JBoss|Glassfish|Oracle|JRE|JDK|JSESSIONID`, key)
 		if match{
-			return "Java"
+			return "Java", nil
 		}
 		match, _ = regexp.MatchString(`(?i)ASP.NET|X-AspNet-Version|x-aspnetmvc-version`, key)
 		if match{
-			return "Asp"
+			return "Asp", nil
 		}
 		match, _ = regexp.MatchString(`(?i)python|zope|zserver|wsgi|plone|_ZopeId`, key)
 		if match{
-			return "Python"
+			return "Python", nil
 		}
 		match, _ = regexp.MatchString(`(?i)mod_rack|phusion|passenger`, key)
 		if match{
-			return "Ruby"
+			return "Ruby", nil
 		}
 	}
 
-	return deepMatch(body)
+	return deepMatch(body), nil
 }
 
 // Find CS lang in HTML

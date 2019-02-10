@@ -6,31 +6,17 @@ import (
 	"github.com/buger/jsonparser"
 	"io/ioutil"
 	"net/http"
-	"strings"
 )
 
-func DetectWaf(header http.Header, body string)(string, error){
+func DetectCdn(header http.Header)(string, error){
 	detected := "Unknown"
-	j_dat, err := ioutil.ReadFile("database/dat_waf.txt")
+	j_dat, err := ioutil.ReadFile("database/dat_cdn.txt")
 	if err != nil{
-		logger.Log.Println("[ Error ][ IOErr ] Load dat_waf.txt Error")
+		logger.Log.Println("[ Error ][ IOErr ] Load dat_cdn.txt Error")
 		return "", err
 	}
 	err = jsonparser.ObjectEach(j_dat, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
-		categ,datatype,_,_ := jsonparser.Get(value, "index")
-		if datatype != jsonparser.NotExist{
-			_,err := jsonparser.ArrayEach(categ, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
-				if strings.Contains(body, string(value)){
-					detected = string(key)
-					return
-				}
-			}, "index")
-			if err != nil{
-				return err
-			}
-		}
-
-		categ,datatype,_,_ = jsonparser.Get(value, "headers")
+		categ,datatype,_,_ := jsonparser.Get(value, "headers")
 		if datatype != jsonparser.NotExist{
 			err = jsonparser.ObjectEach(categ, func(key1 []byte, value1 []byte, dataType jsonparser.ValueType, offset int) error {
 				if _,ok := header[string(key1)];ok{
@@ -47,7 +33,7 @@ func DetectWaf(header http.Header, body string)(string, error){
 		return nil
 	})
 	if err != nil{
-		logger.Log.Printf("[ Error ][ JsonErr ] Parse JsonFile dat_waf.txt Error(%v)\n", err)
+		logger.Log.Printf("[ Error ][ JsonErr ] Parse JsonFile dat_cdn.txt Error(%v)\n", err)
 		return "", err
 	}
 	return detected, nil

@@ -11,8 +11,9 @@ type COOKIERES struct {
 	path []string
 }
 
-func DetectCookieSec(cookies string) *COOKIERES{
+func DetectCookieSec(cookies string) (*COOKIERES, error){
 	var match bool
+	var err error
 	var re *regexp.Regexp
 	var tmp_l [][]string
 	cookieres := COOKIERES{
@@ -22,12 +23,18 @@ func DetectCookieSec(cookies string) *COOKIERES{
 		path:[]string{},
 	}
 	// secure flag
-	match, _ = regexp.MatchString(`(?i)secure;`, cookies)
+	match, err = regexp.MatchString(`(?i)secure;`, cookies)
+	if err != nil{
+		return nil, err
+	}
 	if match{
 		cookieres.secure = true
 	}
 	// httponly flag
-	match, _ = regexp.MatchString(`(?i)HttpOnly`, cookies)
+	match, err = regexp.MatchString(`(?i)HttpOnly`, cookies)
+	if err != nil{
+		return nil, err
+	}
 	if match{
 		cookieres.httponly = true
 	}
@@ -51,5 +58,5 @@ func DetectCookieSec(cookies string) *COOKIERES{
 	if len(path_l) != 0{
 		cookieres.path = path_l
 	}
-	return &cookieres
+	return &cookieres, nil
 }
