@@ -2,19 +2,17 @@ package web
 
 import (
 	"Shyvana/logger"
-	"Shyvana/modules/web/fingerprints"
 	"Shyvana/utils"
 	"Shyvana/vars"
-	"fmt"
 )
 
 func LaunchWebScan(){
 	// Get the response headers with HEAD
-	resp_header := utils.GetRespHeader()
-	if resp_header == nil{
-		logger.Log.Println("[Error][ HttpErr ] Get Response Headers Error")
-	}
-	fmt.Println(resp_header)
+	//resp_header := utils.GetRespHeader()
+	//if resp_header == nil{
+	//	logger.Log.Println("[Error][ HttpErr ] Get Response Headers Error")
+	//}
+	//fmt.Println(resp_header)
 
 	// Get the response headers with OPTIONS
 	//resp_opt_header := utils.GetHttpMethod()
@@ -58,7 +56,11 @@ func LaunchWebScan(){
 	//res := fingerprints.DetectCdn(resp_header)
 	//fmt.Println(res)
 
+	// Detect frontend
+	//res, err := fingerprints.DetectFrontEnd(resp_body)
+	//fmt.Println(res, err)
+
 	// Get Whois Info
-	fingerprints.GetWhoisInfo()
+	//fingerprints.GetWhoisInfo()
 
 }

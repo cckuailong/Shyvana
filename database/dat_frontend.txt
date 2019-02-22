@@ -1,7 +1,29 @@
 {
-    "Airee": {
-    		"headers": {
-    			"Server": ["Airee"]
-    		}
-    	},
+	"AngularJS": {
+		"body": ["ng-app", "ng-version", "app-root"]
+	},
+	"EmberJs": {
+		"body": ["ember-view"]
+	},
+	"Jquery": {
+		"body": ["jquery(.){0,10}.js"]
+	},
+	"Knockout": {
+		"body": ["knockout(.){0,10}.js"]
+	},
+	"MeteorJS": {
+		"body": ["__meteor_runtime_config__"]
+	},
+	"MooTools": {
+		"body": ["MooTools(.){0,10}.js"]
+	},
+	"Prototype": {
+		"body": ["prototype(.){0,10}.js"]
+	},
+	"ReactJS": {
+		"body": ["react(.){0,10}.js", "reactroot", "reactid"]
+	},
+	"VueJS": {
+		"body": ["v-bind", "v-for", "v-if"]
+	}
 }
