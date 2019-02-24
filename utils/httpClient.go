@@ -11,7 +11,7 @@ import (
 )
 
 // http request func
-func http_req(uri string, value url.Values, method string, headers map[string]string) (*http.Response, error){
+func Http_req(uri string, value url.Values, method string, headers map[string]string) (*http.Response, error){
 	var pv io.Reader
 	if value != nil{
 		post_value := value.Encode()
@@ -38,7 +38,7 @@ func http_req(uri string, value url.Values, method string, headers map[string]st
 
 func GetRespHeader()http.Header{
 	params := url.Values{}
-	resp, err := http_req(vars.Webinfo.Web_url, params, "HEAD", vars.Headers)
+	resp, err := Http_req(vars.Webinfo.Web_url, params, "HEAD", vars.Headers)
 	if err != nil{
 		return nil
 	}
@@ -47,7 +47,7 @@ func GetRespHeader()http.Header{
 
 func GetHttpMethod()http.Header{
 	params := url.Values{}
-	resp, err := http_req(vars.Webinfo.Web_url, params, "OPTIONS", vars.Headers)
+	resp, err := Http_req(vars.Webinfo.Web_url, params, "OPTIONS", vars.Headers)
 	if err != nil{
 		return nil
 	}
@@ -56,11 +56,20 @@ func GetHttpMethod()http.Header{
 
 func GetRespBody(uri string)string{
 	params := url.Values{}
-	resp, err := http_req(uri, params, "GET", vars.Headers)
+	resp, err := Http_req(uri, params, "GET", vars.Headers)
+	defer resp.Body.Close()
 	if err != nil{
 		logger.Log.Println("%v", err)
 		return ""
 	}
 	body,  _ := ioutil.ReadAll(resp.Body)
 	return string(body)
+}
+
+func Is404(body string)bool{
+	if strings.Contains(body, "Not found") || strings.Contains(body, "404"){
+		return true
+	}else{
+		return false
+	}
 }

@@ -2,8 +2,12 @@ package web
 
 import (
 	"Shyvana/logger"
+	"Shyvana/modules/web/crawl"
+	"Shyvana/modules/web/fingerprints"
+	"Shyvana/modules/web/vul"
 	"Shyvana/utils"
 	"Shyvana/vars"
+	"fmt"
 )
 
 func LaunchWebScan(){
@@ -63,4 +67,9 @@ func LaunchWebScan(){
 	// Get Whois Info
 	//fingerprints.GetWhoisInfo()
 
+	// Crawl
+	ip_l := fingerprints.GetIPs()
+	crawled_l, _ := crawl.Crawl(ip_l)
+	fmt.Println(crawled_l)
+	vul.RunSqlmap(crawled_l)
 }

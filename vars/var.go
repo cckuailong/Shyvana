@@ -7,6 +7,7 @@ import (
 type (
 		WEBINFO struct {
 			Web_url  string
+			Local string
 		}
 	)
 
@@ -18,6 +19,7 @@ var(
 func init(){
 	web_info := settings.Cfg.Section("WEB")
 	Webinfo.Web_url = web_info.Key("WEB_URL").MustString("http://l0vebear.top/wordpress/")
+	Webinfo.Local = web_info.Key("LOCAL").MustString("http://127.0.0.1:8775/")
 
 	Headers = make(map[string]string)
 	Headers["Accept"] = "application/ "

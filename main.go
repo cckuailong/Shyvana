@@ -4,7 +4,8 @@ import "Shyvana/modules/web"
 
 func main(){
 	web.LaunchWebScan()
-	//l := []string{"jquery-1.1-min.js"}
-	//res := utils.StrLikelyIn(`jquery(.){0,10}.js`, l)
-	//fmt.Println(res)
+	//body := `href="assets/css/bootstrap.min.css"`
+	//re, _ := regexp.Compile(`(?i)href\s?=\s?["\|']#?(.*?)["\|']`)
+	//uris := re.FindAllStringSubmatch(body, -1)
+	//fmt.Println(uris)
 }
