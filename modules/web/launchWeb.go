@@ -2,9 +2,7 @@ package web
 
 import (
 	"Shyvana/logger"
-	"Shyvana/modules/web/crawl"
 	"Shyvana/modules/web/fingerprints"
-	"Shyvana/modules/web/vul"
 	"Shyvana/utils"
 	"Shyvana/vars"
 	"fmt"
@@ -12,11 +10,11 @@ import (
 
 func LaunchWebScan(){
 	// Get the response headers with HEAD
-	//resp_header := utils.GetRespHeader()
-	//if resp_header == nil{
-	//	logger.Log.Println("[Error][ HttpErr ] Get Response Headers Error")
-	//}
-	//fmt.Println(resp_header)
+	resp_header := utils.GetRespHeader()
+	if resp_header == nil{
+		logger.Log.Println("[Error][ HttpErr ] Get Response Headers Error")
+	}
+	fmt.Println(resp_header)
 
 	// Get the response headers with OPTIONS
 	//resp_opt_header := utils.GetHttpMethod()
@@ -57,8 +55,8 @@ func LaunchWebScan(){
 	//fmt.Println(res)
 
 	// Detect cdn
-	//res := fingerprints.DetectCdn(resp_header)
-	//fmt.Println(res)
+	res,_ := fingerprints.DetectCdn(resp_header)
+	fmt.Println(res)
 
 	// Detect frontend
 	//res, err := fingerprints.DetectFrontEnd(resp_body)
@@ -68,8 +66,8 @@ func LaunchWebScan(){
 	//fingerprints.GetWhoisInfo()
 
 	// Crawl
-	ip_l := fingerprints.GetIPs()
-	crawled_l, _ := crawl.Crawl(ip_l)
-	fmt.Println(crawled_l)
-	vul.RunSqlmap(crawled_l)
+	//ip_l := fingerprints.GetIPs()
+	//crawled_l, _,_:= crawl.Crawl(ip_l)
+	//fmt.Println(crawled_l)
+	//vul.RunSqlmap(crawled_l)
 }

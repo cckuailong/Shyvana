@@ -11,8 +11,9 @@ import (
 )
 
 // http request func
-func Http_req(uri string, value url.Values, method string, headers map[string]string) (*http.Response, error){
+func Http_req(uri string, value url.Values, method string, headers map[string]string, redirect bool) (*http.Response, error){
 	var pv io.Reader
+	var client *http.Client
 	if value != nil{
 		post_value := value.Encode()
 		pv = strings.NewReader(post_value)
@@ -28,7 +29,16 @@ func Http_req(uri string, value url.Values, method string, headers map[string]st
 			req.Header.Add(k, v)
 		}
 	}
-	client := &http.Client{}
+	if redirect{
+		client = &http.Client{}
+	}else{
+		client = &http.Client{
+			CheckRedirect: func(req *http.Request, via []*http.Request) error {
+				return http.ErrUseLastResponse
+			},
+		}
+	}
+
 	resp, err := client.Do(req)
 	if err != nil{
 		return nil, err
@@ -38,16 +48,25 @@ func Http_req(uri string, value url.Values, method string, headers map[string]st
 
 func GetRespHeader()http.Header{
 	params := url.Values{}
-	resp, err := Http_req(vars.Webinfo.Web_url, params, "HEAD", vars.Headers)
+	resp, err := Http_req(vars.Webinfo.Web_url, params, "HEAD", vars.Headers, true)
 	if err != nil{
 		return nil
 	}
 	return resp.Header
 }
 
+func GetRespHeaderNoRedirect(uri string)(http.Header,int){
+	params := url.Values{}
+	resp, err := Http_req(uri, params, "HEAD", vars.Headers, false)
+	if err != nil{
+		return nil, 0
+	}
+	return resp.Header, resp.StatusCode
+}
+
 func GetHttpMethod()http.Header{
 	params := url.Values{}
-	resp, err := Http_req(vars.Webinfo.Web_url, params, "OPTIONS", vars.Headers)
+	resp, err := Http_req(vars.Webinfo.Web_url, params, "OPTIONS", vars.Headers, true)
 	if err != nil{
 		return nil
 	}
@@ -56,7 +75,7 @@ func GetHttpMethod()http.Header{
 
 func GetRespBody(uri string)string{
 	params := url.Values{}
-	resp, err := Http_req(uri, params, "GET", vars.Headers)
+	resp, err := Http_req(uri, params, "GET", vars.Headers,true)
 	defer resp.Body.Close()
 	if err != nil{
 		logger.Log.Println("%v", err)

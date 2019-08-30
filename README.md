@@ -28,15 +28,16 @@ A full vul scanner which contains many aspects (adding)
 | Web | Vul| LDAPInj | N |
 | Web | Vul| XpathInj | N |
 | Web | Vul| PhpInj | N |
-| Web | Vul| XSS | N |
-| Web | Vul| File Upload | N |
-| Web | Vul| WebSensFile| N |
-| Web | Vul| WebBackdoor| N |
-| Web | Vul| VerCtrlLeak| N |
-| Web | Vul| RFI | N |
-| Web | Vul| SslScan| N |
-| Web | Vul| WebVulDB| N |
-| Web | Vul| WebFuzz| N |
+| Web| Vul | SSRF | Y|
+| Web | Vul | XSS | N |
+| Web | Vul | File Upload | N |
+| Web | Vul | WebSensFile| N |
+| Web | Vul | WebBackdoor| N |
+| Web | Vul | VerCtrlLeak| N |
+| Web | Vul | RFI | N |
+| Web | Vul | SslScan| N |
+| Web | Vul | WebVulDB| N |
+| Web | Vul | WebFuzz| N |
 | Host | Fingerprint | OS&Version | N |
 | Host | Fingerprint | Port&Service | N |
 | Host | Vul | HostSensFile | N |

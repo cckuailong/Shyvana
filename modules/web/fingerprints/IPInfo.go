@@ -37,11 +37,14 @@ func GetOneIP(domain string)(string, bool){
 	if strings.Contains(res, "no such host"){
 		return "", false
 	}
+	if res == ""{
+		return "",false
+	}
 	return res, true
 }
 
 func GetIPs()[]string{
-	domain := GetMainDomain()
+	domain := GetMainDomain(vars.Webinfo.Web_url)
 	if domain == ""{
 		return nil
 	}
@@ -53,14 +56,20 @@ func GetIPs()[]string{
 	return ip_l
 }
 
-func GetMainDomain()string{
-	re, _ := regexp.Compile(`(?i)http[s]?://[www]?(.*?)/`)
-	res := re.FindAllStringSubmatch(vars.Webinfo.Web_url, -1)
+func GetMainDomain(uri string)string{
+	re, _ := regexp.Compile(`(?i)http[s]?://(www\.)?(.*?)/`)
+	res := re.FindAllStringSubmatch(uri, -1)
 	if len(res) == 0{
 		logger.Log.Println("[ Warning ][ GetDomainWarn ] Please Check Your Url")
 		return ""
 	}
-	return res[0][1]
+	return res[0][len(res[0])-1]
+}
+
+func GetPureUri(uri string) string{
+	re, _ := regexp.Compile(`(?i)http[s]?://(.*?)/`)
+	res := re.FindAllStringSubmatch(uri, -1)
+	return res[0][len(res[0])-1]
 }
 
 func GetIPInfo(ip string) *IPINFO{
