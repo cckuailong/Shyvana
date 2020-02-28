@@ -2,7 +2,7 @@ package vul
 
 import (
 	"Shyvana/logger"
-	"Shyvana/modules/web/fingerprints"
+	"Shyvana/modules/web/net"
 	"Shyvana/utils"
 	"strconv"
 	"strings"
@@ -38,9 +38,8 @@ func is_inner_addr(ip string) bool{
 		ip2long("192.168.0.0")>>16 == ip_long>>16
 }
 
-func check_inner(uri string) bool{
-	domain := fingerprints.GetPureUri(uri)
-	ip,ok := fingerprints.GetOneIP(domain)
+func check_inner(domain string) bool{
+	ip,ok := net.GetOneIP(domain)
 	if !ok{
 		logger.Log.Println("[ Error ][ SSRFError ] Failed To Translate Domain To IP")
 		return false
@@ -49,7 +48,8 @@ func check_inner(uri string) bool{
 }
 
 func Check_ssrf(uri string) bool{
-	if check_inner(uri){
+	domain := net.GetMainDomain(uri)
+	if check_inner(domain){
 		return true
 	}
 	headers,status_code := utils.GetRespHeaderNoRedirect(uri)
@@ -60,7 +60,7 @@ func Check_ssrf(uri string) bool{
 		}else if strings.HasPrefix(redirect_uri, "http"){ // http(s)://ip:port/mid/test.html
 			redirect_uri = redirect_uri
 		} else if strings.HasPrefix(redirect_uri, "/"){ // /test.html
-			redirect_uri = fingerprints.GetPureUri(uri)+redirect_uri
+			redirect_uri = domain+redirect_uri
 		}else{ // test.html
 			redirect_uri = uri+redirect_uri
 		}

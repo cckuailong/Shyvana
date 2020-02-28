@@ -1,7 +1,7 @@
 package crawl
 
 import (
-	"Shyvana/modules/web/fingerprints"
+	"Shyvana/modules/web/net"
 	"Shyvana/utils"
 	"Shyvana/vars"
 	"container/list"
@@ -12,12 +12,11 @@ import (
 
 // Input (uri's different IP , use to filter)
 // return (Website URIs, Found Emails)
-func Crawl(ip_l []string)([]string, []string, []string){
-	var body string
+func Crawl()([]string, []string){
 	fetched_email := []string{}
 	crawling_l := list.New()
 	crawled_l := []string{}
-	maindom := fingerprints.GetMainDomain()
+	maindom := net.GetMainDomain(vars.Webinfo.Web_url)
 
 	crawling_l.PushBack(vars.Webinfo.Web_url)
 	for crawling_l.Len() != 0{
@@ -27,8 +26,8 @@ func Crawl(ip_l []string)([]string, []string, []string){
 			crawling_l.Remove(front)
 			continue
 		}
-		body = utils.GetRespBody(cur_uri)
-		if utils.Is404(body){
+		body, status_code := utils.GetRespBody(cur_uri)
+		if status_code == 404 || utils.Is404(body){
 			crawling_l.Remove(front)
 			continue
 		}
@@ -38,7 +37,7 @@ func Crawl(ip_l []string)([]string, []string, []string){
 		for _, uri := range(uris){
 			uu := uri[1]
 			if strings.HasPrefix(uu, "http"){
-				if filterUri(uu, maindom, ip_l[0]){
+				if filterUri(uu, maindom){
 					crawling_l.PushBack(uu)
 				}
 			}else{
@@ -54,8 +53,8 @@ func Crawl(ip_l []string)([]string, []string, []string){
 }
 
 // Filter the Appropriate Uri
-func filterUri(uri, maindom, ip string)bool{
-	if (strings.Contains(uri, maindom) || strings.Contains(uri, ip)) && strings.Contains(uri, "http"){
+func filterUri(uri, maindom string)bool{
+	if strings.Contains(uri, maindom) && strings.Contains(uri, "http"){
 		return true
 	}else{
 		return false

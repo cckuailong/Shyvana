@@ -3,7 +3,7 @@ package logger
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/x-cray/logrus-prefixed-formatter"
-	)
+)
 
 var(
 	Log *logrus.Entry

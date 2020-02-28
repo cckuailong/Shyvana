@@ -3,6 +3,7 @@ package utils
 import (
 	"Shyvana/logger"
 	"Shyvana/vars"
+	"crypto/tls"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -29,6 +30,7 @@ func Http_req(uri string, value url.Values, method string, headers map[string]st
 			req.Header.Add(k, v)
 		}
 	}
+	// redirect option
 	if redirect{
 		client = &http.Client{}
 	}else{
@@ -37,6 +39,12 @@ func Http_req(uri string, value url.Values, method string, headers map[string]st
 				return http.ErrUseLastResponse
 			},
 		}
+	}
+	// ignore https verify
+	client.Transport = &http.Transport{
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true,
+		},
 	}
 
 	resp, err := client.Do(req)
@@ -73,22 +81,15 @@ func GetHttpMethod()http.Header{
 	return resp.Header
 }
 
-func GetRespBody(uri string)string{
+func GetRespBody(uri string) (string, int){
 	params := url.Values{}
 	resp, err := Http_req(uri, params, "GET", vars.Headers,true)
 	defer resp.Body.Close()
 	if err != nil{
 		logger.Log.Println("%v", err)
-		return ""
+		return "", -1
 	}
 	body,  _ := ioutil.ReadAll(resp.Body)
-	return string(body)
-}
 
-func Is404(body string)bool{
-	if strings.Contains(body, "Not found") || strings.Contains(body, "404"){
-		return true
-	}else{
-		return false
-	}
+	return string(body), resp.StatusCode
 }

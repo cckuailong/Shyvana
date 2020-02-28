@@ -1,20 +1,19 @@
 package web
 
 import (
-	"Shyvana/logger"
-	"Shyvana/modules/web/fingerprints"
 	"Shyvana/utils"
 	"Shyvana/vars"
-	"fmt"
 )
 
 func LaunchWebScan(){
+	// Get the 404 Page
+	vars.Webinfo.Page_404 = utils.Get404()
 	// Get the response headers with HEAD
-	resp_header := utils.GetRespHeader()
-	if resp_header == nil{
-		logger.Log.Println("[Error][ HttpErr ] Get Response Headers Error")
-	}
-	fmt.Println(resp_header)
+	//resp_header := utils.GetRespHeader()
+	//if resp_header == nil{
+	//	logger.Log.Println("[Error][ HttpErr ] Get Response Headers Error")
+	//}
+	//fmt.Println(resp_header)
 
 	// Get the response headers with OPTIONS
 	//resp_opt_header := utils.GetHttpMethod()
@@ -23,10 +22,10 @@ func LaunchWebScan(){
 	//}
 
 	//Get the response body with GET
-	resp_body := utils.GetRespBody(vars.Webinfo.Web_url)
-	if len(resp_body) == 0{
-		logger.Log.Println("[ Warinng ][ HttpWarn ] Get Http Body Error or Empty Body")
-	}
+	//resp_body,_ := utils.GetRespBody(vars.Webinfo.Web_url)
+	//if len(resp_body) == 0{
+	//	logger.Log.Println("[ Warinng ][ HttpWarn ] Get Http Body Error or Empty Body")
+	//}
 
 	// Get the Web Server, Like Apache, Nginx and so on
 	// Empty: ""
@@ -55,8 +54,8 @@ func LaunchWebScan(){
 	//fmt.Println(res)
 
 	// Detect cdn
-	res,_ := fingerprints.DetectCdn(resp_header)
-	fmt.Println(res)
+	//res,_ := fingerprints.DetectCdn(resp_header)
+	//fmt.Println(res)
 
 	// Detect frontend
 	//res, err := fingerprints.DetectFrontEnd(resp_body)
